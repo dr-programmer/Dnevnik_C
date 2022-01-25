@@ -17,7 +17,6 @@ void mySearchOtlichnici(char *choice, char *filename);
 void myAdd(char *choice, char *filename);
 void myCreator(char *choice, char *filename);
 void myReader(char *choice, char *filename);
-void myEdit(char *choice, char *filename);
 
 int main()
 {
@@ -86,7 +85,6 @@ int main()
             }
             else if(strstr(choice, menu8))break;
         }
-        else if(option == 'e')myEdit(choice, filename);
     }
     return 0;
 }
@@ -253,44 +251,4 @@ void myReader(char *choice, char *filename)
     printf("\n Press enter to close");
     while(getch() != '\r');
     system("cls"); puts(choice);
-}
-void myEdit(char *choice, char *filename)
-{
-    FILE *f;
-    Tstudent s;
-    int i, found = 0;
-    char name[100];
-    char *p;
-    printf("\n Type the name of the student you want to edit: ");
-    scanf("%s", &name);
-    if(f = fopen(filename, "r+")){
-        while(!feof(f)){
-            fread(&s, sizeof(s), 1, f);
-        }
-        if(!found){
-            printf("Number(0 = end): ");
-            scanf("%d", &s.number);
-            if(s.number == 0)return;
-            getchar();
-            printf("Name: ");
-            fgets(s.name, 29, stdin);
-            p = strchr(s.name, '\n');
-            *p = '\0';
-            s.avr = 0;
-            for(i = 0; i < maxbr; i++){
-                printf("Mark(0 = end): ");
-                scanf("%d", &s.marks[i]);
-                if(s.marks[i] == 0)break;
-                s.avr += s.marks[i];
-            }
-            if(i)s.avr = s.avr/i;
-            fwrite(&s, sizeof(s), 1, f);
-        }
-        else printf("\n The student %s isn't found!", name);
-        printf("\n Press enter to close");
-        while(getch() != '\r');
-        system("cls"); puts(choice);
-        fclose(f);
-    }
-    else printf("Error opening the file!");
 }
