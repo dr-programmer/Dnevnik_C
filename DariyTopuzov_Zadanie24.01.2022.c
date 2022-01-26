@@ -17,18 +17,25 @@ void mySearchOtlichnici(char *choice, char *filename);
 void myAdd(char *choice, char *filename);
 void myCreator(char *choice, char *filename);
 void myReader(char *choice, char *filename);
+void myDelete(char *choice, char *filename);
+void myEdit(char *choice, char *filename);
+void mySort(char *choice, char *filename);
 
 int main()
 {
     int option, i, ooption;
-    char menu1[1000] = {" Create file < \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Exit "};
-    char menu2[1000] = {" Create file \n Read file < \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Exit "};
-    char menu3[1000] = {" Create file \n Read file \n Search students for popravka < \n Otlichnici \n Add Students \n Change file \n File name \n Exit "};
-    char menu4[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici < \n Add Students \n Change file \n File name \n Exit "};
-    char menu5[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students < \n Change file \n File name \n Exit "};
-    char menu6[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file < \n File name \n Exit "};
-    char menu7[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name < \n Exit "};
-    char menu8[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Exit < "};
+    char menu1[1000] = {" Create file < \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu2[1000] = {" Create file \n Read file < \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu3[1000] = {" Create file \n Read file \n Search students for popravka < \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu4[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici < \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu5[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students < \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu6[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file < \n File name \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu7[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name < \n Delete student \n Edit student \n Sort \n Exit "};
+    char menu8[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student < \n Edit student \n Sort \n Exit "};
+    char menu9[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student < \n Sort \n Exit "};
+    char menu10[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort < \n Exit "};
+    char menu11[1000] = {" Create file \n Read file \n Search students for popravka \n Otlichnici \n Add Students \n Change file \n File name \n Delete student \n Edit student \n Sort \n Exit < "};
+
     char *p;
     char choice[1000], filename[100];
     Tstudent s;
@@ -51,7 +58,10 @@ int main()
                     else if(strstr(choice, menu6)){puts(menu5); strcpy(choice, menu5);}
                     else if(strstr(choice, menu7)){puts(menu6); strcpy(choice, menu6);}
                     else if(strstr(choice, menu8)){puts(menu7); strcpy(choice, menu7);}
-                    else if(strstr(choice, menu1)){puts(menu8); strcpy(choice, menu8);}
+                    else if(strstr(choice, menu9)){puts(menu8); strcpy(choice, menu8);}
+                    else if(strstr(choice, menu10)){puts(menu9); strcpy(choice, menu9);}
+                    else if(strstr(choice, menu11)){puts(menu10); strcpy(choice, menu10);}
+                    else if(strstr(choice, menu1)){puts(menu11); strcpy(choice, menu11);}
                     break;
                 case 80: system("cls");
                     if(strstr(choice, menu1)){puts(menu2); strcpy(choice, menu2);}
@@ -61,7 +71,10 @@ int main()
                     else if(strstr(choice, menu5)){puts(menu6); strcpy(choice, menu6);}
                     else if(strstr(choice, menu6)){puts(menu7); strcpy(choice, menu7);}
                     else if(strstr(choice, menu7)){puts(menu8); strcpy(choice, menu8);}
-                    else if(strstr(choice, menu8)){puts(menu1); strcpy(choice, menu1);}
+                    else if(strstr(choice, menu8)){puts(menu9); strcpy(choice, menu9);}
+                    else if(strstr(choice, menu9)){puts(menu10); strcpy(choice, menu10);}
+                    else if(strstr(choice, menu10)){puts(menu11); strcpy(choice, menu11);}
+                    else if(strstr(choice, menu11)){puts(menu1); strcpy(choice, menu1);}
                     break;
             }
         }
@@ -83,7 +96,10 @@ int main()
                 while(getch() != '\r');
                 system("cls"); puts(choice);
             }
-            else if(strstr(choice, menu8))break;
+            else if(strstr(choice, menu8))myDelete(choice, filename);
+            else if(strstr(choice, menu9))myEdit(choice, filename);
+            else if(strstr(choice, menu10))mySort(choice, filename);
+            else if(strstr(choice, menu11))break;
         }
     }
     return 0;
@@ -249,6 +265,190 @@ void myReader(char *choice, char *filename)
     }
     else printf("Error opening the file!");
     printf("\n Press enter to close");
+    while(getch() != '\r');
+    system("cls"); puts(choice);
+}
+void myDelete(char *choice, char *filename)
+{
+    FILE *f, *f1;
+    Tstudent s;
+    int i, number, flag = 0;
+    printf("\n Type the number of the student you want to delete: ");
+    scanf("%d", &number);
+    if(!(f = fopen(filename, "r"))){printf("\n Error opening the file!"); return;}
+    if(!(f1 = fopen("pom.dat", "w"))){fclose(f); printf("\n Error opening the file!"); return;}
+    while(!feof(f)){
+        if(fread(&s, sizeof(s), 1, f)){
+            if(s.number == number){flag = 1; continue;}
+            fwrite(&s, sizeof(s), 1, f1);
+        }
+    }
+    fclose(f);
+    fclose(f1);
+    if(!(f = fopen(filename, "w"))){printf("\n Error opening the file!"); return;}
+    if(!(f1 = fopen("pom.dat", "r"))){fclose(f); printf("\n Error opening the file!"); return;}
+    while(!feof(f1)){
+        if(fread(&s, sizeof(s), 1, f1)){
+            fwrite(&s, sizeof(s), 1, f);
+        }
+    }
+    fclose(f);
+    fclose(f1);
+    if(flag)printf(" Student deleted successfully! \n Press enter to close");
+    else printf(" No student to be deleted! \n Press enter to close");
+    while(getch() != '\r');
+    system("cls"); puts(choice);
+}
+void myEdit(char *choice, char *filename)
+{
+    FILE *f, *f1;
+    Tstudent s;
+    int i, number, flag = 0;
+    char *p;
+    printf("\n Type the number of the student you want to delete: ");
+    scanf("%d", &number);
+    if(!(f = fopen(filename, "r"))){printf("\n Error opening the file!"); return;}
+    if(!(f1 = fopen("pom.dat", "w"))){fclose(f); printf("\n Error opening the file!"); return;}
+    while(!feof(f)){
+        if(fread(&s, sizeof(s), 1, f)){
+            if(s.number == number){flag = 1; continue;}
+            fwrite(&s, sizeof(s), 1, f1);
+        }
+    }
+    fclose(f);
+    fclose(f1);
+    if(!(f = fopen(filename, "w"))){printf("\n Error opening the file!"); return;}
+    if(!(f1 = fopen("pom.dat", "r"))){fclose(f); printf("\n Error opening the file!"); return;}
+    while(!feof(f1)){
+        if(fread(&s, sizeof(s), 1, f1)){
+            fwrite(&s, sizeof(s), 1, f);
+        }
+    }
+    fclose(f);
+    fclose(f1);
+    if(flag){
+        if(f = fopen(filename, "r+")){
+            while(!feof(f)){
+                fread(&s, sizeof(s), 1, f);
+            }
+            printf("Number(0 = end): ");
+            scanf("%d", &s.number);
+            if(s.number == 0)return;
+            getchar();
+            printf("Name: ");
+            fgets(s.name, 29, stdin);
+            p = strchr(s.name, '\n');
+            *p = '\0';
+            s.avr = 0;
+            for(i = 0; i < maxbr; i++){
+                printf("Mark(0 = end): ");
+                scanf("%d", &s.marks[i]);
+                if(s.marks[i] == 0)break;
+                s.avr += s.marks[i];
+            }
+            if(i)s.avr = s.avr/i;
+            fwrite(&s, sizeof(s), 1, f);
+            fclose(f);
+        }
+        else printf("Error opening the file!");
+        printf(" Student edited successfully! \n Press enter to close");
+        while(getch() != '\r');
+    }
+    else {
+        printf(" No student to be edited! \n Press enter to close");
+        while(getch() != '\r');
+    }
+    system("cls"); puts(choice);
+}
+void mySort(char *choice, char *filename)
+{
+    FILE *f;
+    Tstudent s, ss[100], r;
+    char sortName[100] = {" Choose how to sort: \n Sort by name < \n Sort by average mark "};
+    char sortMark[100] = {" Choose how to sort: \n Sort by name \n Sort by average mark < "};
+    char sortChoice[100];
+    int i, n = 0, sorted = 0, k, soption;
+    system("cls");
+    puts(sortName);
+    strcpy(sortChoice, sortName);
+    while(1){
+        soption = getch();
+        if(soption == 224){
+            switch(getch()){
+                case 72: system("cls");
+                    if(strstr(sortChoice, sortName)){puts(sortMark); strcpy(sortChoice, sortMark);}
+                    else if(strstr(sortChoice, sortMark)){puts(sortName); strcpy(sortChoice, sortName);}
+                    break;
+                case 80: system("cls");
+                    if(strstr(sortChoice, sortName)){puts(sortMark); strcpy(sortChoice, sortMark);}
+                    else if(strstr(sortChoice, sortMark)){puts(sortName); strcpy(sortChoice, sortName);}
+                    break;
+            }
+        }
+        else if(soption == '\r'){
+            if(strstr(sortChoice, sortName)){
+                if(f = fopen(filename, "r")){
+                    while(!feof(f)){
+                        if(fread(&s, sizeof(s), 1, f)){
+                            ss[n] = s;
+                            n++;
+                        }
+                    }
+                    for(i = 0; i < n-1; i++){
+                        sorted = 1;
+                        for(k = 0; k < n-1; k++){
+                            if(strcmp(ss[k].name, ss[k+1].name) > 0){
+                                r = ss[k];
+                                ss[k] = ss[k+1];
+                                ss[k+1] = r;
+                                sorted = 0;
+                            }
+                        }
+                        if(sorted)break;
+                    }
+                    fclose(f);
+                }
+                if(f = fopen(filename, "w")){
+                    for(i = 0; i < n; i++){
+                        fwrite(&ss[i], sizeof(ss[i]), 1, f);
+                    }
+                    fclose(f);
+                }
+                break;
+            }
+            else if(strstr(sortChoice, sortMark)){
+                if(f = fopen(filename, "r")){
+                    while(!feof(f)){
+                        if(fread(&s, sizeof(s), 1, f)){
+                            ss[n] = s;
+                            n++;
+                        }
+                    }
+                    for(i = 0; i < n-1; i++){
+                        sorted = 1;
+                        for(k = 0; k < n-1; k++){
+                            if(ss[k].avr < ss[k+1].avr){
+                                r = ss[k];
+                                ss[k] = ss[k+1];
+                                ss[k+1] = r;
+                                sorted = 0;
+                            }
+                        }
+                        if(sorted)break;
+                    }
+                    fclose(f);
+                }
+                if(f = fopen(filename, "w")){
+                    for(i = 0; i < n; i++){
+                        fwrite(&ss[i], sizeof(ss[i]), 1, f);
+                    }
+                    fclose(f);
+                }
+                break;
+            }
+        }
+    }
+    printf("\n Sorted! \n Press enter to close");
     while(getch() != '\r');
     system("cls"); puts(choice);
 }
